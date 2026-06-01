@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Complete Donation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+    <header>
+        <h1 id="headerTitle">Donation Details</h1>
+    </header>
+    
+    <main style="padding: 40px;">
+        <div class="card" style="max-width: 500px; margin: auto;">
+            <!-- Form start yahan se hota hai -->
+            <form id="donationForm">
+                <label>Full Name:</label><br>
+                <input type="text" id="userName" placeholder="Apna naam likhein" style="width: 100%; padding: 10px; margin: 10px 0;" required><br>
+                
+                <label id="dynamicLabel">Quantity/Details:</label><br>
+                <input type="text" id="inputValue" placeholder="Details likhein..." style="width: 100%; padding: 10px; margin: 10px 0;" required><br>
+
+                <button type="button" onclick="validateAndSubmit()">Submit Donation</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
+        
+        if (type === 'Money') {
+            document.getElementById('dynamicLabel').innerText = "Amount (PKR):";
+            document.getElementById('headerTitle').innerText = "Donate Money";
+        } else if (type) {
+            document.getElementById('dynamicLabel').innerText = type + " Details:";
+            document.getElementById('headerTitle').innerText = "Donate " + type;
+        }
+
+        function validateAndSubmit() {
+            const name = document.getElementById('userName').value;
+            const details = document.getElementById('inputValue').value;
+
+            if (name === "" || details === "") {
+                alert("Barah-e-karam apna naam aur details darj karein!");
+            } else {
+                alert('Shukriya! Aapki ' + name + ' ki taraf se ' + document.getElementById('dynamicLabel').innerText + ' request moosool ho gayi hai.');
+            }
+        }
+    </script>
+</body>
+</html>
